@@ -1,18 +1,18 @@
 s3:
-	bucket: kevintran-bucket
-	prefix: raw-data/
-	download_path: /opt/airflow/data/raw/
+  bucket: kevintran-bucket
+  prefix: raw-data/
+  download_path: /opt/airflow/data/raw/
 
 spark:
-	input_path: /opt/airflow/data/raw/
-	output_path: /opt/airflow/data/processed/
+  input_path: /opt/airflow/data/raw/
+  output_path: /opt/airflow/data/processed/
 
 snowflake:
-	user: KEVINTRAN
-	password: UVR7vgz_veu0udc4pbe
-	account: kqbytdq-hl78582
-	warehouse: XSMALL_WH
-	database: CLOUD_DB
-	schema: CLEANED_DATA
-	table: UEFA_STATS
-	role: SYSADMIN
+  user: KEVINTRAN
+  password: UVR7vgz_veu0udc4pbe
+  account: kqbytdq-hl78582
+  warehouse: XSMALL_WH
+  database: CLOUD_DB
+  schema: CLEANED_DATA
+  table: UEFA_STATS
+  role: SYSADMIN

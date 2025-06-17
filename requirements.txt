@@ -1,0 +1,14 @@
+# Core dependencies
+boto3                  # AWS SDK for Python (S3 access)
+pyspark                # Apache Spark (PySpark)
+snowflake-connector-python  # Snowflake Python connector
+pyyaml                 # To parse YAML config files
+
+# Airflow and providers
+apache-airflow==2.8.1         # Adjust version as needed
+apache-airflow-providers-amazon
+apache-airflow-providers-snowflake
+
+# Logging and utilities
+python-dotenv           # For managing environment variables (optional)
+pandas                  # Often used for data handling

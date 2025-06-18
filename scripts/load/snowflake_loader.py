@@ -33,7 +33,7 @@ def load_csv_to_snowflake(config):
     table = sf_config['table']
     
     # Get all CSV files in processed folder
-    csv_files = glob(os,path.join(processed_path, '*.csv'))
+    csv_files = glob(os.path.join(processed_path, '*.csv'))
     if not csv_files:
         logger.info(f'No csv files found in {processed_path}')
         return
@@ -81,7 +81,3 @@ def load_to_snowflake():
 # Optional manual test
 if __name__ == '__main__':
     load_to_snowflake()
-            
-            
-            
-            

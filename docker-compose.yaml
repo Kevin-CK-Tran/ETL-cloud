@@ -1,11 +1,14 @@
-version: '3.8'
+# Removed: version: '3.8' ← no longer needed in Compose V2
 
 x-airflow-common:
   &airflow-common
-  image: apache/airflow:2.9.1-python3.9
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: custom-airflow:latest  # Tag your custom-built image
   environment:
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
-    AIRFLOW__CORE__FERNET_KEY: 'Fsahx6SmvAw_fmrhvV1X0cMKoxKYMaBXWvSsggXoKH4='  # ✅ Pre-generated secure key
+    AIRFLOW__CORE__FERNET_KEY: 'Fsahx6SmvAw_fmrhvV1X0cMKoxKYMaBXWvSsggXoKH4='
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'false'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow

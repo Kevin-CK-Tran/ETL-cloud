@@ -5,10 +5,11 @@ x-airflow-common:
   image: apache/airflow:2.9.1-python3.9
   environment:
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
-    AIRFLOW__CORE__FERNET_KEY: ''
+    AIRFLOW__CORE__FERNET_KEY: 'Fsahx6SmvAw_fmrhvV1X0cMKoxKYMaBXWvSsggXoKH4='  # ✅ Pre-generated secure key
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'false'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__WEBSERVER__DEFAULT_UI_TIMEZONE: Asia/Ho_Chi_Minh
   volumes:
     - ./dags:/opt/airflow/dags
     - ./configs:/opt/airflow/configs
@@ -19,10 +20,12 @@ x-airflow-common:
     - ./requirements.txt:/requirements.txt
   depends_on:
     - postgres
+  user: "${AIRFLOW_UID:-50000}:0"
 
 services:
   postgres:
     image: postgres:13
+    container_name: postgres
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
@@ -32,6 +35,7 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
+    container_name: airflow-webserver
     command: webserver
     ports:
       - 8080:8080
@@ -43,14 +47,20 @@ services:
 
   airflow-scheduler:
     <<: *airflow-common
+    container_name: airflow-scheduler
     command: scheduler
 
   airflow-init:
     <<: *airflow-common
-    command: bash -c "airflow db migrate && airflow users create \
-      --username admin --password admin \
-      --firstname Admin --lastname User \
-      --role Admin --email admin@example.com"
+    container_name: airflow-init
+    entrypoint: /bin/bash
+    command: >
+      -c "
+      airflow db migrate &&
+      airflow users create --username admin --password admin \
+        --firstname Admin --lastname User \
+        --role Admin --email admin@example.com
+      "
 
 volumes:
   postgres-db-volume:

@@ -1,12 +1,11 @@
 import os 
 import boto3
 import yaml
-import logging
 from botocore.exceptions import BotoCoreError, ClientError
 
 # Setup logger
-logging.basicConfig(level=logging.INFO,format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(_name_)
+from utils.logger import get_logger
+logger = get_logger(__name__)
 
 # Load configuration from YAML file
 def load_config(config_path='configs/config.yaml'):

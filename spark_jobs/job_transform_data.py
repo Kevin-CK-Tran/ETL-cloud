@@ -1,10 +1,9 @@
 from pyspark.sql import SparkSession
 import argparse
-import logging
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+from utils.logger import get_logger
+logger = get_logger(__name__)
 
 def transform_data (spark, input_path, output_path):
     logger.info(f'Reading raw data from {input_path}')

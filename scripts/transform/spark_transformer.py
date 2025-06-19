@@ -1,11 +1,10 @@
 import os
 import yaml
-import logging
 import subprocess
 
 # Setup logger
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+from utils.logger import get_logger
+logger = get_logger(__name__)
 
 # Load configuration from YAML file
 def load_config(config_path='configs/config.yaml'):

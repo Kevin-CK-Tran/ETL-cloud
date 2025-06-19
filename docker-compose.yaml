@@ -1,11 +1,9 @@
-# Removed: version: '3.8' ← no longer needed in Compose V2
-
 x-airflow-common:
   &airflow-common
   build:
     context: .
     dockerfile: Dockerfile
-  image: custom-airflow:latest  # Tag your custom-built image
+  image: custom-airflow:latest
   environment:
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__CORE__FERNET_KEY: 'Fsahx6SmvAw_fmrhvV1X0cMKoxKYMaBXWvSsggXoKH4='

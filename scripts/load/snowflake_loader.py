@@ -31,7 +31,7 @@ def load_csv_to_snowflake(config):
             file_name = os.path.basename(file_path)
 
             logger.info(f"Uploading {file_name} to Snowflake stage...")
-            put_cmd = f'PUT file://{file_path} @temp_football_stage OVERRIDE = TRUE'
+            put_cmd = f'PUT file://{file_path} @temp_football_stage OVERWRITE = TRUE'
             cursor.execute(put_cmd)
 
             logger.info(f"Copying {file_name} from stage to table {table_name}...")

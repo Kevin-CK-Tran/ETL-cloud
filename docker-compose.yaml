@@ -1,3 +1,5 @@
+version: '3.8'
+
 x-airflow-common:
   &airflow-common
   build:
@@ -11,6 +13,8 @@ x-airflow-common:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__WEBSERVER__DEFAULT_UI_TIMEZONE: Asia/Ho_Chi_Minh
+    AIRFLOW__WEBSERVER__SECRET_KEY: 'mgofnMrR1vtliiHEzlVSuUioqxpXH6sBFt_OAMhaZuc'
+    PYTHONPATH: /opt/airflow
   volumes:
     - ./dags:/opt/airflow/dags
     - ./configs:/opt/airflow/configs
@@ -56,12 +60,9 @@ services:
     container_name: airflow-init
     entrypoint: /bin/bash
     command: >
-      -c "
-      airflow db migrate &&
-      airflow users create --username admin --password admin \
-        --firstname Admin --lastname User \
-        --role Admin --email admin@example.com
-      "
+      -c "airflow db migrate &&
+          airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com"
+
 
 volumes:
   postgres-db-volume:

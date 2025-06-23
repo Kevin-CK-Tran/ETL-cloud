@@ -54,7 +54,7 @@ def download_files_from_s3(config):
         logger.info("All files downloaded successfully")
         
     except (BotoCoreError, ClientError) as e:
-        logger.error(f"Failed to download files from S3: {error}")
+        logger.error(f"Failed to download files from S3: {e}")
         raise
             
 # Last function - This is the function that Airflow DAG will call

@@ -43,5 +43,5 @@ def transform_with_spark():
     run_spark_job(config)
 
 # Optional for standalone manual testing    
-if __name__ = "__main__":
+if __name__ == "__main__":
     transform_with_spark()
